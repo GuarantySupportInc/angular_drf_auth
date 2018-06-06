@@ -3,8 +3,9 @@
 
   <div>
     <ul>
-      <li><a [routerLink]="'/welcome'">Welcome</a></li>
-      <li><a [routerLink]="'/login'">Login</a></li>
+      <li *ngIf="!auth.loggedIn()"><a [routerLink]="'/login'">Login</a></li>
+      <li *ngIf="auth.loggedIn()"><a [routerLink]="'/welcome'">Welcome</a></li>
+      <li *ngIf="auth.loggedIn()"><a href="#" (click)="onLogoutClick()">Logout</a></li>
     </ul>
   </div>
 

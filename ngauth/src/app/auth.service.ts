@@ -36,7 +36,16 @@ export class AuthService {
     this.userinfo = userinfo;
   }
 
-  check_django_login_status() {
+  loggedIn() {
+    this.loadToken();
+    if (this.authToken != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkDjangoLoginStatus() {
     this.loadToken();
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

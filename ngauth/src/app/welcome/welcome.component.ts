@@ -12,7 +12,7 @@ export class WelcomeComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit() {
-    this.auth.check_django_login_status().subscribe(
+    this.auth.checkDjangoLoginStatus().subscribe(
       (response) => {
         console.log(response);
       },
