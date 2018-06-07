@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-guestbook',
@@ -14,10 +15,18 @@ export class GuestbookComponent implements OnInit {
   name: String;
   quote: String;
 
-  constructor() { }
+  constructor(private auth:AuthService) { }
 
   ngOnInit() {
-
+    this.auth.getGuestbookEntries().subscribe(
+      (entries) => {
+        console.log(entries);
+        // TODO - if there's no entries, display a message to that effect
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   onSubmit() {
@@ -25,6 +34,17 @@ export class GuestbookComponent implements OnInit {
     this.quote = '';
     this.name = '';
     this.guestbook_entries.push(new_entry);
+
+    this.auth.createGuestbookEntry(new_entry).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (err) => {
+        console.log(err);
+        // TODO - display an error message and remove the new entry
+        // from the displayed list (to keep parity with the db)
+      }
+    );
   }
 
 }

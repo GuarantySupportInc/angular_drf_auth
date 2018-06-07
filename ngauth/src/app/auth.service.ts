@@ -29,6 +29,15 @@ export class AuthService {
     this.authToken = token;
   }
 
+  getAuthHeaders() {
+    this.loadToken();
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `JWT ${this.authToken}`
+    });
+    return headers;
+  }
+
   storeUserData(token, userinfo) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('userinfo', JSON.stringify(userinfo));
@@ -52,13 +61,19 @@ export class AuthService {
   }
 
   checkDjangoLoginStatus() {
-    this.loadToken();
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `JWT ${this.authToken}`
-    });
-    //headers.append('Authorization', `JWT ${this.authToken}`);
-    //console.log(headers);
+    let headers = this.getAuthHeaders();
     return this.http.get(`${this.API_URL}/logged_in_check/`, {headers: headers})
+  }
+
+  // These functions should probably be in their own service,
+  // but this app is small enough that I'm just putting them here
+  createGuestbookEntry(entry) {
+    let headers = this.getAuthHeaders();
+    return this.http.post(`${this.API_URL}/guestbook/create/`, {headers: headers}, entry);
+  }
+
+  getGuestbookEntries() {
+    let headers = this.getAuthHeaders();
+    return this.http.get(`${this.API_URL}/guestbook/get_all/`, {headers: headers});
   }
 }
