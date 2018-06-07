@@ -5,6 +5,7 @@
     <ul>
       <li *ngIf="!auth.loggedIn()"><a [routerLink]="'/login'">Login</a></li>
       <li *ngIf="auth.loggedIn()"><a [routerLink]="'/welcome'">Welcome</a></li>
+      <li *ngIf="auth.loggedIn()"><a [routerLink]="'/guestbook'">Guestbook</a></li>
       <li *ngIf="auth.loggedIn()"><a href="#" (click)="onLogoutClick()">Logout</a></li>
     </ul>
   </div>

@@ -1,0 +1,28 @@
+<h1>Guestbook</h1>
+
+<p *ngIf="!guestbook_entries">No one has signed the guestbook yet...</p>
+<ul *ngIf="guestbook_entries">
+  <li *ngFor="let entry of guestbook_entries">{{ entry.quote }} - {{ entry.name }}</li>
+</ul>
+
+<form #newEntryForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <input type="text" 
+           placeholder="Leave a message!" 
+           class="form-control" 
+           required
+           [(ngModel)]="quote"
+           name="quote">
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+           class="form-control"
+           required
+           [(ngModel)]="name"
+           name="name">
+  </div>
+  <button type="submit"
+          class="btn btn-default"
+          [disabled]="!newEntryForm.form.valid">Post</button>
+</form>
