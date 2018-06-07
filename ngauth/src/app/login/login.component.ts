@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   username: String;
   password: String;
+  error_message: String;
 
   constructor(
     private auth:AuthService,
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
       // JSON but what we want is non_field_errors 
       // in the error object (which is an array)
       // TODO - display this error on the form page
-      console.log(err.error.non_field_errors[0]);
+      //console.log(err.error.non_field_errors[0]);
+      this.error_message = err.error.non_field_errors[0];
     });
   }
 
