@@ -35,6 +35,12 @@ export class AuthService {
     this.authToken = token;
     this.userinfo = userinfo;
   }
+  
+  getUserInfo() {
+    let userinfo = localStorage.getItem('userinfo');
+    userinfo = JSON.parse(userinfo);
+    return userinfo;
+  }
 
   loggedIn() {
     this.loadToken();

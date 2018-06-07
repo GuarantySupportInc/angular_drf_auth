@@ -1,3 +1,4 @@
-<p>
-  You have been successfully authenticated, {{ username }}!
-</p>
+<p>You have been successfully authenticated, {{ username }}!</p>
+<p>Your email address (which was pulled from Django) is {{ email }}</p>
+<p *ngIf="django_confirmation" class="bg-success">Congratulations, you have 
+successfully authenticated via JWT with Django!</p>
