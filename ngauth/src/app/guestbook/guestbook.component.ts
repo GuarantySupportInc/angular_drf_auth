@@ -7,10 +7,14 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./guestbook.component.css']
 })
 export class GuestbookComponent implements OnInit {
+  /*
   guestbook_entries = [
     {quote: 'This site is kinda empty, huh?', name: 'Judgy Joe'},
     {quote: 'Can we get a like button?', name: 'a social butterfly'},
   ];
+  */
+  guestbook_entries: any;
+  no_entries: Boolean = false;
   // variables for new entries
   name: String;
   quote: String;
@@ -19,9 +23,12 @@ export class GuestbookComponent implements OnInit {
 
   ngOnInit() {
     this.auth.getGuestbookEntries().subscribe(
-      (entries) => {
+      (entries: Array<any>) => {
         console.log(entries);
-        // TODO - if there's no entries, display a message to that effect
+        this.guestbook_entries = entries;
+        if (entries.length == 0) {
+          this.no_entries = true;
+        }
       },
       (err) => {
         console.log(err);
@@ -38,11 +45,13 @@ export class GuestbookComponent implements OnInit {
     this.auth.createGuestbookEntry(new_entry).subscribe(
       (response) => {
         console.log(response);
+        if (this.no_entries) {
+          this.no_entries = false;
+        }
       },
       (err) => {
         console.log(err);
-        // TODO - display an error message and remove the new entry
-        // from the displayed list (to keep parity with the db)
+        this.guestbook_entries.pop(); // delete the entry we just added prematurely
       }
     );
   }

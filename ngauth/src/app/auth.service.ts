@@ -69,11 +69,11 @@ export class AuthService {
   // but this app is small enough that I'm just putting them here
   createGuestbookEntry(entry) {
     let headers = this.getAuthHeaders();
-    return this.http.post(`${this.API_URL}/guestbook/create/`, {headers: headers}, entry);
+    return this.http.post(`${this.API_URL}/guestbook/`, entry, {headers: headers});
   }
 
   getGuestbookEntries() {
     let headers = this.getAuthHeaders();
-    return this.http.get(`${this.API_URL}/guestbook/get_all/`, {headers: headers});
+    return this.http.get(`${this.API_URL}/guestbook/`, {headers: headers});
   }
 }

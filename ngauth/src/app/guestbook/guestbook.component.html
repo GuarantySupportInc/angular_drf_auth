@@ -1,6 +1,7 @@
 <h1>Guestbook</h1>
 
-<p *ngIf="!guestbook_entries">Loading guestbook entries...</p>
+<p *ngIf="!guestbook_entries && !no_entries">Loading guestbook entries...</p>
+<p *ngIf="no_entries">Looks like nobody's signed the guestbook yet...</p>
 <ul *ngIf="guestbook_entries">
   <li *ngFor="let entry of guestbook_entries">{{ entry.quote }} - {{ entry.name }}</li>
 </ul>
