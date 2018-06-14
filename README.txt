@@ -14,7 +14,7 @@ Requires:
     ALTER ROLE django SET client_encoding TO 'utf8';
     ALTER ROLE django SET default_transaction_isolation TO 'read committed';
     ALTER ROLE django SET timezone TO 'UTC';
-    GRANT ALL PRIVELEGES ON DATABASE authtest TO django;
+    GRANT ALL PRIVILEGES ON DATABASE authtest TO django;
     (Use `\q` to exit the shell)
 4. `manage.py migrate` to initialize the database
 5. `manage.py createsuperuser` to set up your admin user
