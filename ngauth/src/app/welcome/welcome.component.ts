@@ -15,7 +15,7 @@ export class WelcomeComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit() {
-    let userinfo = this.auth.getUserInfo();
+    let userinfo : any = this.auth.getUserInfo();
     this.username = userinfo.username;
     this.email = userinfo.email;
 

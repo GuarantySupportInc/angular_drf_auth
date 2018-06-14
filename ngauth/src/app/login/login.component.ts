@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   onSubmit() { 
     let user = {'username': this.username, 'password': this.password};
 
-    this.auth.login(user).subscribe((response) => {
+    this.auth.login(user).subscribe((response: any) => {
       //console.log(response);
       // Returns some JSON but what we really need
       // is the token to store, and maybe user details
